@@ -1,0 +1,16 @@
+update for 05/22 to 05/28:
+
+activities during the week:
+- reading and working through the articles in the project task
+- setup of git repository ()
+- deciding to start with task 1.2 (construction of problem set for random tesselation)
+- getting an overview of frameworks for computation and visualization of voronoi tessellation
+      1. voro++ (c++ library with large functionality) - http://math.lbl.gov/voro++/
+      2. pyvoro (python port of voro++ with limited functionality - e.g. no visualization) - https://pypi.org/project/pyvoro/1.3.1/
+      3. scipy (scipy.spatial.Voronoi offers no option for 3d visualization)
+- setting up minimal examples with voro++ and pyvoro (voronoi.cc and voronoi.py respectively)
+
+problems:
+- due to no prior c++ knowledge, I would like to avoid having to use voro++. unfortunately, it seems like voro++ has the best functionality. it has an option to convert the voronoi data into a format readable for gnuplot. the other options (pyvoro, scipy) lack a similar feature
+- the minimal voro++ example (voronoi.cc) will not compile. this is likely due to my lack of c++ knowledge. I will leave the error messages below. the same problem arises when trying to compile an example by the voro++ team (single_cell.cc) so I assume the problem is linked to my installation of voro++. I am compiling with the command "gcc -I/usr/local/include/voro++ voronoi.cc"
+- I have yet to find a simple alternative for visualizing 3d voronoi tesselations with python. Going ahead without any visualization option seems wrong to me. Are you aware of a python library that allows for 3d voronoi visualization?
