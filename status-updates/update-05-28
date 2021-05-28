@@ -14,3 +14,19 @@ problems:
 - due to no prior c++ knowledge, I would like to avoid having to use voro++. unfortunately, it seems like voro++ has the best functionality. it has an option to convert the voronoi data into a format readable for gnuplot. the other options (pyvoro, scipy) lack a similar feature
 - the minimal voro++ example (voronoi.cc) will not compile. this is likely due to my lack of c++ knowledge. I will leave the error messages below. the same problem arises when trying to compile an example by the voro++ team (single_cell.cc) so I assume the problem is linked to my installation of voro++. I am compiling with the command "gcc -I/usr/local/include/voro++ voronoi.cc"
 - I have yet to find a simple alternative for visualizing 3d voronoi tesselations with python. Going ahead without any visualization option seems wrong to me. Are you aware of a python library that allows for 3d voronoi visualization?
+
+gcc -I/usr/local/include/voro++ voronoi.cc
+/usr/bin/ld: /tmp/ccwqYLq5.o: in function `voro::voronoicell_base::draw_gnuplot(double, double, double, char const*)':
+voronoi.cc:(.text._ZN4voro16voronoicell_base12draw_gnuplotEdddPKc[_ZN4voro16voronoicell_base12draw_gnuplotEdddPKc]+0x64): undefined reference to `voro::voronoicell_base::draw_gnuplot(double, double, double, _IO_FILE*)'
+/usr/bin/ld: /tmp/ccwqYLq5.o: in function `voro::voronoicell::plane(double, double, double, double)':
+voronoi.cc:(.text._ZN4voro11voronoicell5planeEdddd[_ZN4voro11voronoicell5planeEdddd]+0x5c): undefined reference to `bool voro::voronoicell_base::nplane<voro::voronoicell>(voro::voronoicell&, double, double, double, double, int)'
+/usr/bin/ld: /tmp/ccwqYLq5.o: in function `voro::voronoicell::init(double, double, double, double, double, double)':
+voronoi.cc:(.text._ZN4voro11voronoicell4initEdddddd[_ZN4voro11voronoicell4initEdddddd]+0x6c): undefined reference to `voro::voronoicell_base::init_base(double, double, double, double, double, double)'
+/usr/bin/ld: /tmp/ccwqYLq5.o: in function `voro::voronoicell::voronoicell()':
+voronoi.cc:(.text._ZN4voro11voronoicellC2Ev[_ZN4voro11voronoicellC5Ev]+0x18): undefined reference to `voro::voronoicell_base::voronoicell_base()'
+/usr/bin/ld: /tmp/ccwqYLq5.o: in function `voro::voronoicell::~voronoicell()':
+voronoi.cc:(.text._ZN4voro11voronoicellD2Ev[_ZN4voro11voronoicellD5Ev]+0x26): undefined reference to `voro::voronoicell_base::~voronoicell_base()'
+/usr/bin/ld: /tmp/ccwqYLq5.o:(.data.rel.ro._ZTIN4voro11voronoicellE[_ZTIN4voro11voronoicellE]+0x0): undefined reference to `vtable for __cxxabiv1::__si_class_type_info'
+/usr/bin/ld: /tmp/ccwqYLq5.o:(.data.rel.ro._ZTIN4voro16voronoicell_baseE[_ZTIN4voro16voronoicell_baseE]+0x0): undefined reference to `vtable for __cxxabiv1::__class_type_info'
+/usr/bin/ld: /tmp/ccwqYLq5.o:(.data.rel.local.DW.ref.__gxx_personality_v0[DW.ref.__gxx_personality_v0]+0x0): undefined reference to `__gxx_personality_v0'
+collect2: error: ld returned 1 exit status
