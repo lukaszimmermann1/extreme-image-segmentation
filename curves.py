@@ -39,8 +39,8 @@ def dist_point_curve(point, curve):
     return res
 
 
-NUM_CURVES = 10          # number of curves to generate
-MAX_DISTANCE = 0        # maximum distance between any two generated curves
+NUM_CURVES = 20          # number of curves to generate
+MAX_DISTANCE = 0.01        # maximum distance between any two generated curves
 IMAGE_RESOLUTION = 16    # amount of pixels per side of the noisy digital image
                         # e.g. IMAGE_RESOLUTION = 16 --> image is 16x16x16
 
