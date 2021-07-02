@@ -38,10 +38,20 @@ def dist_point_curve(point, curve):
             res = dist
     return res
 
+def divisorGenerator(n):
+    large_divisors = []
+    for i in range(1, int(math.sqrt(n) + 1)):
+        if n % i == 0:
+            yield i
+            if i*i != n:
+                large_divisors.append(n / i)
+    for divisor in reversed(large_divisors):
+        yield divisor
 
-NUM_CURVES = 20          # number of curves to generate
+
+NUM_CURVES = 10          # number of curves to generate
 MAX_DISTANCE = 0.01        # maximum distance between any two generated curves
-IMAGE_RESOLUTION = 16    # amount of pixels per side of the noisy digital image
+IMAGE_RESOLUTION = 32    # amount of pixels per side of the noisy digital image
                         # e.g. IMAGE_RESOLUTION = 16 --> image is 16x16x16
 
 curves = []             # array with all curves
@@ -95,8 +105,26 @@ for p in pixels:
     grey_values[p] = min_distance
 
 
+pixel_list = list(grey_values.values())
+print(pixel_list)
+pixel_array = np.array(pixel_list)
 
-grey_values.update((x, y*255) for x, y in grey_values.items())
+divisors = list(divisorGenerator(pixel_array.size))
+length = len(list(divisorGenerator(pixel_array.size)))
+center = math.ceil(length / 2)
+
+print(divisors, center, divisors[center])
+
+
+pixel_array = np.reshape(pixel_array, (int(divisors[center - 1]), -1))
+
+
+
+# print(pixel_array)
+# image_length = int(math.ceil(math.sqrt(pixel_array.size)))
+# pixel_array = np.reshape(pixel_array, (-1, image_length))
+
+# grey_values.update((x, y*255) for x, y in grey_values.items())
 
 # print(grey_values)
 
@@ -104,11 +132,20 @@ grey_values.update((x, y*255) for x, y in grey_values.items())
 # min_value = min(grey_values.values())
 # print(max_value, min_value)
 
-pixel_list = list(zip(grey_values.values(), grey_values.values(), grey_values.values()))
-pixel_list = [pixel_list]
-pixel_array = np.array(pixel_list, dtype=np.uint8)
+# pixel_list = list(zip(grey_values.values(), grey_values.values(), grey_values.values()))
+# pixel_list = [pixel_list]
+# pixel_array = np.array(pixel_list, dtype=np.uint8)
+# print(pixel_array)
+# print(pixel_array.size / 3)
+# array_size = pixel_array.size / 3
+# print(array_size)
+# image_length = int(math.ceil(math.sqrt(array_size)))
+# print(image_length)
+# pixel_array = np.stack(np.vsplit(pixel_array, pixel_array.size / 3))
+# pixel_array = np.reshape(pixel_array, (-1, int(pixel_array.size / 9)))
+# print(pixel_array)
 
 # print(pixel_array)
 
-new_image = Image.fromarray(pixel_array)
+new_image = Image.fromarray(pixel_array, "L")
 new_image.save("grey_values.png")
